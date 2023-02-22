@@ -1,8 +1,6 @@
 package com.example.simpleblog.config
 
-import com.example.simpleblog.domain.member.Member
-import com.example.simpleblog.domain.member.MemberRepository
-import com.example.simpleblog.domain.member.Role
+import com.example.simpleblog.domain.member.*
 import io.github.serpro69.kfaker.Faker
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.annotation.Configuration
@@ -16,16 +14,13 @@ class InitData(
     @EventListener(ApplicationReadyEvent::class)
     private fun init(){
 
-        faker.internet.safeEmail()
+       val dto = MemberSaveReq(
+           email = faker.internet.safeEmail(),
+           password = "1234",
+           role = Role.USER
+       )
 
-
-        val member = Member(
-            email = faker.internet.safeEmail(),
-            password = "1234",
-            role = Role.USER
-
-        )
-        memberRepository.save(member)
+        memberRepository.save(dto.toEntity())
     }
 
 
