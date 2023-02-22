@@ -13,15 +13,20 @@ class InitData(
     val faker = Faker()
     @EventListener(ApplicationReadyEvent::class)
     private fun init(){
-
-       val dto = MemberSaveReq(
-           email = faker.internet.safeEmail(),
-           password = "1234",
-           role = Role.USER
-       )
-
-        memberRepository.save(dto.toEntity())
+        val members = mutableListOf<Member>()
+        for(i in 1 until 100) {
+            val member = generateMember()
+            members.add(member)
+        }
+        memberRepository.saveAll(members)
     }
+
+    private fun generateMember(): Member =MemberSaveReq(
+            email = faker.internet.safeEmail(),
+            password = "1234",
+            role = Role.USER
+        ).toEntity()
+
 
 
 
