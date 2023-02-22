@@ -1,0 +1,21 @@
+
+server:
+  port: 9000
+  servlet:
+    context-path: /
+    encoding:
+      charset: utf-8
+      enabled: true
+
+
+#spring:
+#  datasource:
+##    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://castingbox.cluster-c2wh2sx86xtg.ap-northeast-2.rds.amazonaws.com:3306/casting_box?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+#    username: admin
+#    password: uni1004!
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    generate-ddl: true
+#    show-sql: true
