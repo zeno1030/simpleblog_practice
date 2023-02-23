@@ -1,3 +1,13 @@
+/*
+ * 한 게시글의 수정
+ *
+ * **page**
+ * 포털/SNS/커뮤니티/뉴스관리, 관리설정 > 전체데이터
+ *
+ * **parameter**
+ * options(object): DB 검색옵션
+ * value(object): 수정할 값
+ */
 package com.example.simpleblog.config
 
 import com.example.simpleblog.domain.member.*
