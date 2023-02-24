@@ -1,16 +1,17 @@
 package com.example.simpleblog.exception
 
-import jdk.internal.net.http.common.Log.errors
-import org.springframework.validation.AbstractBindingResult
 import org.springframework.validation.BindingResult
-
-import org.springframework.validation.FieldError
 
 class ErrorResponse(
     errorCode: ErrorCode,
-    var errors:List<>
+    var errors: List<FieldError> = ArrayList()
 ) {
 
+    var code:String = errorCode.code
+        private set
+
+    var message:String = errorCode.message
+        private set
 
 
     class FieldError private constructor(
@@ -21,19 +22,29 @@ class ErrorResponse(
     ){
         companion object{
 
-            fun of(bindingResult:BindingResult){
+            fun of(bindingResult:BindingResult): List<FieldError> {
 
                 val fieldErrors = bindingResult.fieldErrors
 
-                fieldErrors.map{ fieldError ->
+                return fieldErrors.map{ error ->
                     FieldError(
-                        field = errors().field,
-                        value = if(errors().rejectvalue == null)"" else errors().rejectedvalue.toString()
-                        reason = errors.defaultMessage
+                        field = error.field,
+                        value = if(error.rejectedValue == null)"" else error.rejectedValue.toString(),
+                        reason = error.defaultMessage
                     )
                 }
 
             }
         }
+    }
+
+    companion object{
+        fun of(code:ErrorCode, bindingResult: BindingResult): ErrorResponse{
+            return ErrorResponse(
+                errorCode = code,
+                errors = FieldError.of(bindingResult)
+            )
+        }
+
     }
 }
