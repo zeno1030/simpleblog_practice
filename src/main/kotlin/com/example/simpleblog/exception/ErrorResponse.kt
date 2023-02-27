@@ -22,7 +22,7 @@ class ErrorResponse(
     ){
         companion object{
 
-            fun of(bindingResult:BindingResult): List<FieldError> {
+            open fun of(bindingResult:BindingResult): List<FieldError> {
 
                 val fieldErrors = bindingResult.fieldErrors
 
