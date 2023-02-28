@@ -19,7 +19,7 @@ class MyAuthentionFilter: Filter {
         if(principal == null){
             throw RuntimeException("session not found")
         }else{
-            chain.doFilter(request, response)
+            chain?.doFilter(request, response)
         }
 
 
