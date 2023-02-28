@@ -1,6 +1,7 @@
 package com.example.simpleblog.api
 
 import com.example.simpleblog.service.MemberService
+import com.example.simpleblog.util.CmResDto
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.data.web.config.PageableHandlerMethodArgumentResolverCustomizer
@@ -19,7 +20,7 @@ class MemberController(
     private val pageable: PageableHandlerMethodArgumentResolverCustomizer
 ) {
     @GetMapping("/members")
-    fun findAll(@PageableDefault(size = 10) pageable: Pageable, session: HttpSession):CmResDto<*>{
+    fun findAll(@PageableDefault(size = 10) pageable: Pageable, session: HttpSession): CmResDto<*> {
 
         val principal = session.getAttribute("principal")
 
